@@ -5,13 +5,14 @@ const Mustache = require('mustache');
 const {glob} = require('glob');
 const {spawn} = require('child_process');
 
-const TEMPLATE_TYPE = process.argv[2];
 const PROJECT_DIRECTORY = process.argv[3];
 
 const TEMPLATE_TYPES_DIRECTORY = path.join(__dirname, '..', 'templates');
 
-const TEMPLATES_AVAILABLE = fs.readdirSync(TEMPLATE_TYPES_DIRECTORY);
-const TEMPLATE_DIRECTORY = path.join(TEMPLATE_TYPES_DIRECTORY, TEMPLATE_TYPE);
+const TEMPLATES_AVAILABLE = fs.readdirSync(
+	TEMPLATE_TYPES_DIRECTORY,
+	{withFileTypes: true}
+).filter(file => file.isDirectory());
 
 const kebabCase = (val) =>
 	val
@@ -23,11 +24,26 @@ const camelToSnakeCase = (str) =>
 	str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`).toUpperCase();
 
 async function main() {
-	if (!TEMPLATES_AVAILABLE.includes(TEMPLATE_TYPE)) {
-		console.error("Template Doesn't exist.");
+	const templateType = process.argv[2];
+
+	if (!templateType) {
+		const answer = await inquirer.prompt({
+			name: 'templateType',
+			choices: TEMPLATES_AVAILABLE,
+			message: 'Which template would you like to use?',
+			type: 'rawlist'
+		});
+
+		templateType = answer.templateType;
 	}
 
-	const prompts = require(path.join(TEMPLATE_DIRECTORY, 'prompts.json'));
+	if (!TEMPLATES_AVAILABLE.includes(templateType)) {
+		console.error("Template Doesn't exist.");
+	}
+	
+	const templateDirectoryPath = path.join(TEMPLATE_TYPES_DIRECTORY, templateType);
+
+	const prompts = require(path.join(templateDirectoryPath, 'prompts.json'));
 
 	const answers = await inquirer.prompt(prompts);
 
@@ -35,23 +51,6 @@ async function main() {
 	answers.nameSnakeCase = camelToSnakeCase(answers.nameKebabCase);
 
 	answers.projectDir = PROJECT_DIRECTORY || answers.nameKebabCase;
-
-	const mustacheFiles = await glob(
-		path.join(TEMPLATE_DIRECTORY, '**/*.mustache'),
-		{
-			dot: true,
-			ignore: 'node_modules/**',
-		}
-	);
-
-	const preScriptPath = path.join(
-		TEMPLATE_DIRECTORY,
-		'before-templating-process'
-	);
-	const postScriptPath = path.join(
-		TEMPLATE_DIRECTORY,
-		'after-templating-process'
-	);
 
 	const NEW_PROJECT_PATH = path.join(process.cwd(), answers.projectDir);
 
@@ -69,17 +68,30 @@ async function main() {
 		{...process.env}
 	);
 
+	const preScriptPath = path.join(
+		templateDirectoryPath,
+		'before-templating-process'
+	);
+
 	if (fs.existsSync(preScriptPath)) {
 		console.log('Running `before-templating-process`...');
 
 		await run_script(preScriptPath, {env: envVariables});
 	}
 
+	const mustacheFiles = await glob(
+		path.join(templateDirectoryPath, '**/*.mustache'),
+		{
+			dot: true,
+			ignore: 'node_modules/**',
+		}
+	);
+
 	if (mustacheFiles.length) {
 		console.log('Writing files...');
 
 		for (const mustacheFile of mustacheFiles) {
-			const relativePath = mustacheFile.replace(TEMPLATE_DIRECTORY, '');
+			const relativePath = mustacheFile.replace(templateDirectoryPath, '');
 
 			const newFilePath = path
 				.join(NEW_PROJECT_PATH, relativePath)
@@ -93,6 +105,11 @@ async function main() {
 			);
 		}
 	}
+
+	const postScriptPath = path.join(
+		templateDirectoryPath,
+		'after-templating-process'
+	);
 
 	if (fs.existsSync(postScriptPath)) {
 		console.log('Running `after-templating-process`...');
