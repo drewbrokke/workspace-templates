@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+
+const useTypescript = process.env.PROMPTS_TYPESCRIPT === 'true';
+const useReact = process.env.PROMPTS_REACT === 'true';
+
+process.chdir(process.env.PROMPTS_PROJECT_DIR);
+
+const files = [`src/index.js`, `src/index.ts`, `src/react.js`, `src/react.tsx`];
+
+function removeAllFilesExcept(keepFile) {
+	files.forEach((file) => {
+		if (file !== keepFile) {
+			fs.rmSync(file);
+		}
+	});
+}
+
+if (useTypescript) {
+	if (useReact) {
+		removeAllFilesExcept('src/react.tsx');
+		fs.renameSync('src/react.tsx', 'src/index.tsx');
+	} else {
+		removeAllFilesExcept('src/index.ts');
+	}
+} else {
+	fs.rmSync('tsconfig.json');
+
+	if (useReact) {
+		removeAllFilesExcept('src/react.js');
+		fs.renameSync('src/react.js', 'src/index.js');
+	} else {
+		removeAllFilesExcept('src/index.js');
+	}
+}

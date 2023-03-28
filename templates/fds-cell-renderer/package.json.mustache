@@ -1,0 +1,24 @@
+{
+  "name": "{{ nameKebabCase }}",
+  "version": "1.0.0",
+  "dependencies": {
+    "@liferay/dxp-7.4": "*"
+  },
+{{#typescript}}
+  {{#react}}
+  "main": "./src/index.tsx",
+  {{/react}}
+  {{^react}}
+  "main": "./src/index.ts",
+  {{/react}}
+{{/typescript}}
+{{^typescript}}
+  "main": "./src/index.js",
+{{/typescript}}
+  "scripts": {
+    "build": "liferay build",
+    "clean": "liferay clean",
+    "deploy": "liferay deploy",
+    "start": "liferay start"
+  }
+}

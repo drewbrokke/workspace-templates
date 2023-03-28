@@ -1,0 +1,12 @@
+[
+	{
+		"name": "name",
+		"message":"What is the name of your React Custom Element Client Extension?",
+		"type": "string"
+	},
+	{
+		"name": "typescript",
+		"message":"Do you want to use typescript?",
+		"type": "confirm"
+	}
+]

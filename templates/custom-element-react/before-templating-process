@@ -1,0 +1,60 @@
+#!/usr/bin/env node
+
+const {spawnSync} = require('child_process');
+const fs = require('fs');
+
+const result = spawnSync(
+	'npx',
+	[
+		'create-react-app@latest',
+		process.env.PROMPTS_PROJECT_DIR,
+		process.env.PROMPTS_TYPESCRIPT === 'true'
+			? '--template typescript'
+			: '',
+	],
+	{
+		shell: true,
+		stdio: 'inherit',
+	}
+);
+
+if (result.status) {
+	process.exit(result.status);
+}
+
+process.chdir(process.env.PROMPTS_PROJECT_DIR);
+
+spawnSync('npm', ['install', '--save-dev', 'sass'], {
+	shell: true,
+	stdio: 'inherit',
+});
+
+spawnSync(
+	'npm',
+	[
+		'uninstall',
+		'--save',
+		'@testing-library/jest-dom @testing-library/react @testing-library/user-event web-vitals',
+	],
+	{
+		shell: true,
+		stdio: 'inherit',
+	}
+);
+
+fs.rmSync('public/favicon.ico');
+fs.rmSync('public/logo192.png');
+fs.rmSync('public/logo512.png');
+fs.rmSync('public/manifest.json');
+fs.rmSync('public/robots.txt');
+
+fs.rmSync('./src', {recursive: true});
+
+const contents = fs.readFileSync('public/index.html', 'utf-8');
+
+const replaced = contents.replace(
+	'<div id="root"></div>',
+	`<${process.env.PROMPTS_NAME_KEBAB_CASE} route=\"hello-world\"></${process.env.PROMPTS_NAME_KEBAB_CASE}>`
+);
+
+fs.writeFileSync('public/index.html', replaced, 'utf-8');
