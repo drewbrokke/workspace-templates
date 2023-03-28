@@ -1,0 +1,15 @@
+assemble:
+    - from: build/static
+      into: static
+react-custom-element-typescript:
+    cssURLs:
+        - css/main.*.css
+    friendlyURLMapping: react-custom-element-typescript
+    htmlElementName: react-custom-element-typescript
+    instanceable: false
+    name: React custom element typescript
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - js/main.*.js
+    useESM: true
