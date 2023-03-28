@@ -1,3 +1,7 @@
+> Project Sturcture:
+>    - Initialized workspace with `blade init``
+>    - Added `./templates`, `./client-extensions`, and `./generate-cli`(this will be removed later)
+
 # Templates
 
 **Workflow:**
