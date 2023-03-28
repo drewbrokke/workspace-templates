@@ -44,8 +44,6 @@ async function main() {
 		}
 	);
 
-	console.log(mustacheFiles);
-
 	const preScriptPath = path.join(
 		TEMPLATE_DIRECTORY,
 		'before-templating-process'
