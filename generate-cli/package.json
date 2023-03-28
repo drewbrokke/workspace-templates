@@ -1,0 +1,10 @@
+{
+	"name": "generate-cli",
+	"version": "1.0.0",
+	"dependencies": {
+		"cross-spawn": "^7.0.3",
+		"glob": "^9.3.2",
+		"inquirer": "^8.2.5",
+		"mustache": "^4.2.0"
+	}
+}
