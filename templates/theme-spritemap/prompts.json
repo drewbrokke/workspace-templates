@@ -1,10 +1,5 @@
 [
 	{
-		"name": "name",
-		"message":"What is the name of your Theme Spritemap Client Extension?",
-		"type": "string"
-	},
-	{
 		"name": "extendClay",
 		"message": "Do you want to extend the original Clay spritemap?",
 		"type": "confirm"

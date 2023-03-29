@@ -1,10 +1,5 @@
 [
 	{
-		"name": "name",
-		"message":"What is the name of your FDS Cell Renderer?",
-		"type": "string"
-	},
-	{
 		"name": "typescript",
 		"message":"Do you want to use typescript?",
 		"type": "confirm"
