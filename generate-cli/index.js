@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
 const Mustache = require('mustache');
+const yaml = require('js-yaml');
 const {glob} = require('glob');
 const {spawn} = require('child_process');
 
@@ -24,17 +25,19 @@ const camelToSnakeCase = (str) =>
 	str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`).toUpperCase();
 
 async function main() {
-	const templateType = process.argv[2];
+	let templateType = process.argv[2];
+
+	let answers = {};
 
 	if (!templateType) {
-		const answer = await inquirer.prompt({
+		answers = await inquirer.prompt({
 			name: 'templateType',
 			choices: TEMPLATES_AVAILABLE,
 			message: 'Which template would you like to use?',
 			type: 'rawlist'
-		});
+		}, answers);
 
-		templateType = answer.templateType;
+		templateType = answers.templateType;
 	}
 
 	if (!TEMPLATES_AVAILABLE.includes(templateType)) {
@@ -45,20 +48,31 @@ async function main() {
 
 	const prompts = require(path.join(templateDirectoryPath, 'prompts.json'));
 
-	const answers = await inquirer.prompt(prompts);
+	answers = await inquirer.prompt(prompts, answers);
 
 	answers.nameKebabCase = kebabCase(answers.name);
 	answers.nameSnakeCase = camelToSnakeCase(answers.nameKebabCase);
 
 	answers.projectDir = PROJECT_DIRECTORY || answers.nameKebabCase;
 
-	const NEW_PROJECT_PATH = path.join(process.cwd(), answers.projectDir);
+	const newProjectPath = path.join(process.cwd(), answers.projectDir);
 
-	if (fs.existsSync(NEW_PROJECT_PATH)) {
+	if (fs.existsSync(newProjectPath)) {
 		console.error('Project directory already exists');
 
 		return;
 	}
+
+	const existingContainerConfigPath = checkForContainerConfig(newProjectPath);
+
+	const sharedConfigMessage = existingContainerConfigPath ? `\n >>> (found '${path.relative(process.cwd(), existingContainerConfigPath)}')` : '';
+
+	answers = await inquirer.prompt({
+		name: 'sharedContainer',
+		message:
+			`Should this client extension use a shared container?${sharedConfigMessage}`,
+		type: 'confirm',
+	}, answers);
 
 	const envVariables = Object.keys(answers).reduce(
 		(acc, key) => ({
@@ -91,17 +105,47 @@ async function main() {
 		console.log('Writing files...');
 
 		for (const mustacheFile of mustacheFiles) {
+			const content = Mustache.render(fs.readFileSync(mustacheFile, 'utf8'), answers);
+
+			if (mustacheFile.includes('client-extension.yaml') && answers.sharedContainer) {
+				let sharedYamlConfig = {assemble: []}
+
+				if (existingContainerConfigPath){
+					sharedYamlConfig = {
+						...sharedYamlConfig,
+						...yaml.load(
+							fs.readFileSync(existingContainerConfigPath, 'utf8')
+						)
+					};
+				}
+
+				const projectYamlConfig = yaml.load(content);
+
+				const {assemble, ...otherSharedConfig} = sharedYamlConfig
+
+				fs.writeFileSync(
+					existingContainerConfigPath || 'client-extension.yaml',
+					yaml.dump({
+						assemble: [...assemble, ...projectYamlConfig.assemble],
+						...otherSharedConfig,
+						[answers.nameKebabCase]: projectYamlConfig[answers.nameKebabCase]
+					})
+				);
+
+				continue;
+			}
+
 			const relativePath = mustacheFile.replace(templateDirectoryPath, '');
 
 			const newFilePath = path
-				.join(NEW_PROJECT_PATH, relativePath)
+				.join(newProjectPath, relativePath)
 				.replace('.mustache', '');
 
 			fs.mkdirSync(path.dirname(newFilePath), {recursive: true});
 
 			fs.writeFileSync(
 				newFilePath,
-				Mustache.render(fs.readFileSync(mustacheFile, 'utf8'), answers)
+				content
 			);
 		}
 	}
@@ -115,6 +159,24 @@ async function main() {
 		console.log('Running `after-templating-process`...');
 
 		await run_script(postScriptPath, {env: envVariables});
+	}
+}
+
+function checkForContainerConfig(dir) {
+	while (true) {
+		const containerConfigPath = path.join(dir, 'client-extension.yaml');
+
+		if (fs.existsSync(containerConfigPath)) {
+			return containerConfigPath
+		}
+
+		if (fs.existsSync(path.join(dir, 'gradle.properties'))) {
+			return;
+		}
+
+		const parentDir = path.dirname(dir);
+
+		dir = parentDir;
 	}
 }
 
