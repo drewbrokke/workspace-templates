@@ -1,1 +1,14 @@
 // Check GETTING_STARTED.markdown for information regarding usage.
+
+task createClientExtension(type: Exec)
+createClientExtension {
+	doFirst {
+		println gradle.startParameter.consoleOutput
+		if (gradle.startParameter.consoleOutput != ConsoleOutput.Plain) {
+			throw new StopExecutionException("This task requires plain console output. Please re-run with the '--console=plain' flag.")
+		}
+	}
+
+	commandLine 'node', 'generate-cli/index.js'
+	standardInput System.in
+}
