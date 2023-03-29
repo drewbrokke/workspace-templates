@@ -1,0 +1,12 @@
+{
+	"dependencies": {
+		"@liferay/dxp-7.4": "*"
+	},
+	"name": "theme-spritemap-client-extension",
+	"scripts": {
+		"build": "liferay build",
+		"clean": "liferay clean",
+		"deploy": "liferay deploy"
+	},
+	"version": "1.0.0"
+}
