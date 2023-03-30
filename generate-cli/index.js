@@ -68,7 +68,9 @@ async function main() {
 		return;
 	}
 
-	const existingContainerConfigPath = checkForSharedConfig(newProjectPath);
+	process.chdir(newProjectPath);
+
+	const existingContainerConfigPath = checkForSharedConfig(process.cwd());
 
 	answers = await inquirer.prompt({
 		name: 'sharedContainer',
