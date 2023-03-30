@@ -60,16 +60,6 @@ async function main() {
 
 	answers.projectDir = PROJECT_DIRECTORY || answers.nameKebabCase;
 
-	const newProjectPath = path.join(process.cwd(), answers.projectDir);
-
-	if (fs.existsSync(newProjectPath)) {
-		console.error('Project directory already exists');
-
-		return;
-	}
-
-	process.chdir(newProjectPath);
-
 	const existingContainerConfigPath = checkForSharedConfig(process.cwd());
 
 	answers = await inquirer.prompt({
@@ -80,6 +70,33 @@ async function main() {
 			}`,
 		type: 'confirm',
 	}, answers);
+
+	if(answers.sharedContainer && !existingContainerConfigPath) {
+		answers = await inquirer.prompt({
+			default: 'my-shared-project',
+			name: 'sharedDir',
+			message:
+				`What should the shared project directory be called?`,
+			type: 'input',
+		}, answers);
+
+		fs.mkdirSync(answers.sharedDir);
+	}
+
+	const projectWorkspaceDir = path.join(process.cwd(), answers.sharedDir || '')
+	const newProjectPath = path.join(projectWorkspaceDir, answers.projectDir);
+
+	if (fs.existsSync(newProjectPath)) {
+		console.error('Project directory already exists');
+
+		return;
+	}
+
+	fs.mkdirSync(newProjectPath);
+
+	console.log(newProjectPath);
+
+	process.chdir(newProjectPath);
 
 	const envVariables = collectEnvVariables(answers);
 
@@ -109,7 +126,7 @@ async function main() {
 
 			if (mustacheFile.includes('client-extension.yaml') && answers.sharedContainer) {
 				writeContainerConfig(
-					existingContainerConfigPath,
+					projectWorkspaceDir,
 					Mustache.render(
 						fs.readFileSync(mustacheFile, 'utf8'),
 						answers

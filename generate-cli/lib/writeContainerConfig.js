@@ -1,10 +1,13 @@
 const fs = require('fs');
+const path = require('path');
 const yaml = require('js-yaml');
 
-function writeContainerConfig(configPath, projectConfigContent, projectName) {
+function writeContainerConfig(configDir, projectConfigContent, projectName) {
+	const configPath = path.join(configDir, 'client-extension.yaml')
+
 	let sharedYamlConfig = {assemble: []}
 
-	if (configPath){
+	if (fs.existsSync(configPath)){
 		sharedYamlConfig = {
 			...sharedYamlConfig,
 			...yaml.load(
