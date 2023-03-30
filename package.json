@@ -1,22 +1,12 @@
 {
-  "name": "dxp-7.4-u69",
-  "version": "1.0.0",
-  "description": "> Project Sturcture: >    - Initialized workspace with `blade init`` >    - Added `./templates`, `./client-extensions`, and `./generate-cli`(this will be removed later)",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bryceosterhaus/workspace-templates.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bryceosterhaus/workspace-templates/issues"
-  },
-  "homepage": "https://github.com/bryceosterhaus/workspace-templates#readme",
-  "workspaces": [
-    "./generate-cli"
-  ]
+    "name": "dxp-7.4-u69",
+    "version": "1.0.0",
+    "main": "index.js",
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "client-extensions/custom-element-react",
+            "generate-cli"
+        ]
+    }
 }
