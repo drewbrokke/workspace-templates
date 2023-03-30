@@ -4,8 +4,6 @@ const fs = require('fs');
 
 const EXTENSION = process.env.PROMPTS_TYPESCRIPT === 'true' ? '.js' : '.tsx'
 
-process.chdir(process.env.PROMPTS_PROJECT_DIR);
-
 fs.rmSync(`src/pages/HelloBar${EXTENSION}`);
 fs.rmSync(`src/pages/HelloFoo${EXTENSION}`);
 fs.rmSync(`src/pages/HelloWorld${EXTENSION}`);

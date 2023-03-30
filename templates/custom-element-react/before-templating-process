@@ -7,7 +7,7 @@ const result = spawnSync(
 	'npx',
 	[
 		'create-react-app@latest',
-		process.env.PROMPTS_PROJECT_DIR,
+		'.',
 		process.env.PROMPTS_TYPESCRIPT === 'true'
 			? '--template typescript'
 			: '',
@@ -21,8 +21,6 @@ const result = spawnSync(
 if (result.status) {
 	process.exit(result.status);
 }
-
-process.chdir(process.env.PROMPTS_PROJECT_DIR);
 
 spawnSync('npm', ['install', '--save-dev', 'sass'], {
 	shell: true,
