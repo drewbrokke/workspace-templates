@@ -1,4 +1,7 @@
 {
+	"bin": {
+		"createClientExtension": "./index.js"
+	},
 	"name": "generate-cli",
 	"version": "1.0.0",
 	"dependencies": {
