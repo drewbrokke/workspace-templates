@@ -67,6 +67,7 @@ async function main() {
 	const existingContainerConfigPath = checkForSharedConfig(process.cwd());
 
 	answers = await inquirer.prompt({
+		default: false,
 		name: 'sharedContainer',
 		message:
 			`Should this client extension use a shared container?${
