@@ -26,6 +26,10 @@ const TEMPLATES_AVAILABLE = fs.readdirSync(
 async function main() {
 	let templateType = process.argv[2];
 
+	if (templateType && !TEMPLATES_AVAILABLE.find(item => item.name === templateType)) {
+		console.error("Template Doesn't exist.");
+	}
+
 	let answers = {};
 
 	if (!templateType) {
@@ -37,11 +41,6 @@ async function main() {
 		}, answers);
 
 		templateType = answers.templateType;
-	}
-	
-
-	if (!TEMPLATES_AVAILABLE.includes(templateType)) {
-		console.error("Template Doesn't exist.");
 	}
 	
 	const templateDirectoryPath = path.join(TEMPLATE_TYPES_DIRECTORY, templateType);
