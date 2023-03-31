@@ -1,11 +1,10 @@
 {
-    "name": "dxp-7.4-u69",
-    "version": "1.0.0",
-    "main": "index.js",
     "private": true,
     "workspaces": {
         "packages": [
+            "client-extensions/fds-cell-renderer",
             "client-extensions/custom-element-react",
+            "client-extensions/theme-spritemap",
             "generate-cli"
         ]
     }
