@@ -1,7 +1,18 @@
 assemble:
+    {{#sharedContainer}}
+    - from: {{ nameKebabCase }}/build/spritemap.svg
+      into: static/{{ nameKebabCase }}
+    {{/sharedContainer}}
+    {{^sharedContainer}}
     - from: build/spritemap.svg
       into: static
+    {{/sharedContainer}}
 {{ nameKebabCase }}:
     name: {{ name }}
     type: themeSpritemap
+    {{#sharedContainer}}
+    url: {{ nameKebabCase }}/spritemap.svg 
+    {{/sharedContainer}}
+    {{^sharedContainer}}
     url: spritemap.svg 
+    {{/sharedContainer}}

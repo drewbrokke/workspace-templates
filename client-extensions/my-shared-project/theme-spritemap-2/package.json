@@ -1,0 +1,10 @@
+{
+	"dependencies": {
+		"@liferay/dxp-7.4": "*"
+	},
+	"name": "theme-spritemap-2",
+	"scripts": {
+		"build": "liferay build"
+	},
+	"version": "1.0.0"
+}

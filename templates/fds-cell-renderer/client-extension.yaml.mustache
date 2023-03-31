@@ -1,7 +1,18 @@
 assemble:
+    {{#sharedContainer}}
+    - from: {{ nameKebabCase }}/build/index.js
+      into: static/{{ nameKebabCase }}
+    {{/sharedContainer}}
+    {{^sharedContainer}}
     - from: build/index.js
       into: static
+    {{/sharedContainer}}
 {{ nameKebabCase }}:
     name: {{ name }}
     type: fdsCellRenderer
-    url: index.js
+    {{#sharedContainer}}
+    url: {{ nameKebabCase }}/index.js 
+    {{/sharedContainer}}
+    {{^sharedContainer}}
+    url: index.js 
+    {{/sharedContainer}}

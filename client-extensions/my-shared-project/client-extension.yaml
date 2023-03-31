@@ -1,0 +1,43 @@
+assemble:
+  - from: theme-spritemap-2/build/spritemap.svg
+    into: static/theme-spritemap-2
+  - from: fds-cell-renderer-2/build/index.js
+    into: static/fds-cell-renderer-2
+  - from: custom-element-liferay-cli-2/build/css/styles.css
+    into: static/custom-element-liferay-cli-2
+  - from: custom-element-liferay-cli-2/build/index.js
+    into: static/custom-element-liferay-cli-2
+  - from: custom-element-create-react-app-2/build/static
+    into: static/custom-element-create-react-app-2
+theme-spritemap-2:
+  name: theme-spritemap-2
+  type: themeSpritemap
+  url: theme-spritemap-2/spritemap.svg
+fds-cell-renderer-2:
+  name: fds-cell-renderer-2
+  type: fdsCellRenderer
+  url: fds-cell-renderer-2/index.js
+custom-element-liferay-cli-2:
+  cssURLs:
+    - custom-element-liferay-cli-2/styles.css
+  friendlyURLMapping: custom-element-liferay-cli-2
+  htmlElementName: custom-element-liferay-cli-2
+  instanceable: false
+  name: custom-element-liferay-cli-2
+  portletCategoryName: category.client-extensions
+  type: customElement
+  urls:
+    - custom-element-liferay-cli-2/index.js
+  useESM: true
+custom-element-create-react-app-2:
+  cssURLs:
+    - custom-element-create-react-app-2/css/main.*.css
+  friendlyURLMapping: custom-element-create-react-app-2
+  htmlElementName: custom-element-create-react-app-2
+  instanceable: false
+  name: custom-element-create-react-app-2
+  portletCategoryName: category.client-extensions
+  type: customElement
+  urls:
+    - custom-element-create-react-app-2/js/main.*.js
+  useESM: true

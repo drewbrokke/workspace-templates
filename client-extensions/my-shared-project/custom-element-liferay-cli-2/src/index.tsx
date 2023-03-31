@@ -18,11 +18,11 @@ class CustomElement extends HTMLElement {
 	}
 }
 
-const ELEMENT_NAME = '{{ nameKebabCase }}';
+const ELEMENT_NAME = 'custom-element-liferay-cli-2';
 
 if (customElements.get(ELEMENT_NAME)) {
 	console.log(
-		'Skipping registration for <{{ nameKebabCase }}> (already registered)'
+		'Skipping registration for <custom-element-liferay-cli-2> (already registered)'
 	);
 } else {
 	customElements.define(ELEMENT_NAME, CustomElement);

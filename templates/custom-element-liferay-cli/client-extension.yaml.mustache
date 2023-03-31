@@ -1,11 +1,24 @@
 assemble:
+    {{#sharedContainer}}
+    - from: {{ nameKebabCase }}/build/css/styles.css
+      into: static/{{ nameKebabCase }}
+    - from: {{ nameKebabCase }}/build/index.js
+      into: static/{{ nameKebabCase }}
+    {{/sharedContainer}}
+    {{^sharedContainer}}
     - from: build/css/styles.css
       into: static
     - from: build/index.js
       into: static
+    {{/sharedContainer}}
 {{ nameKebabCase }}:
     cssURLs:
+        {{#sharedContainer}}
+        - {{ nameKebabCase }}/styles.css
+        {{/sharedContainer}}
+        {{^sharedContainer}}
         - styles.css
+        {{/sharedContainer}}
     friendlyURLMapping: {{ nameKebabCase }}
     htmlElementName: {{ nameKebabCase }}
     instanceable: false
@@ -13,5 +26,10 @@ assemble:
     portletCategoryName: category.client-extensions
     type: customElement
     urls:
+        {{#sharedContainer}}
+        - {{ nameKebabCase }}/index.js
+        {{/sharedContainer}}
+        {{^sharedContainer}}
         - index.js
+        {{/sharedContainer}}
     useESM: true
