@@ -44,7 +44,10 @@ async function main() {
 	
 	const templateDirectoryPath = path.join(TEMPLATE_TYPES_DIRECTORY, templateType);
 
-	const prompts = require(path.join(templateDirectoryPath, 'prompts.json'));
+	const promptsPath = path.join(templateDirectoryPath, 'prompts.json');
+	const promptsExist = fs.existsSync(promptsPath)
+
+	const prompts = promptsExist ? require(promptsPath) : []
 
 	answers = await inquirer.prompt([
 		{
