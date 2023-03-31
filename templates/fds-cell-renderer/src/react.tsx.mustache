@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 const fdsCellRenderer: FDSCellRenderer = ({value}) => {
 	const element = document.createElement('div');
 
-	ReactDOM.render(<>{value}</>, element);
+	ReactDOM.render(<b>{value.toString()}</b>, element);
 
 	return element;
 };

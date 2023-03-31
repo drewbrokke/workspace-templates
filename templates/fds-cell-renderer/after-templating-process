@@ -5,8 +5,6 @@ const fs = require('fs');
 const useTypescript = process.env.PROMPTS_TYPESCRIPT === 'true';
 const useReact = process.env.PROMPTS_REACT === 'true';
 
-process.chdir(process.env.PROMPTS_PROJECT_DIR);
-
 const files = [`src/index.js`, `src/index.ts`, `src/react.js`, `src/react.tsx`];
 
 function removeAllFilesExcept(keepFile) {

@@ -37,7 +37,7 @@ class WebComponent extends HTMLElement {
 	}
 }
 
-const ELEMENT_ID = '{{ CUSTOM_ELEMENT_NAME }}';
+const ELEMENT_ID = '{{ nameKebabCase }}';
 
 if (!customElements.get(ELEMENT_ID)) {
 	customElements.define(ELEMENT_ID, WebComponent);
