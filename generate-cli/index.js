@@ -19,7 +19,9 @@ const TEMPLATE_TYPES_DIRECTORY = path.join(__dirname, '..', 'templates');
 const TEMPLATES_AVAILABLE = fs.readdirSync(
 	TEMPLATE_TYPES_DIRECTORY,
 	{withFileTypes: true}
-).filter(file => file.isDirectory());
+).filter(file => 
+	file.isDirectory() && fs.existsSync(path.join(TEMPLATE_TYPES_DIRECTORY, file.name, 'client-extension.yaml.mustache'))
+);
 
 async function main() {
 	let templateType = process.argv[2];
