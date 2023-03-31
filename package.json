@@ -3,8 +3,8 @@
     "workspaces": {
         "packages": [
             "client-extensions/fds-cell-renderer",
-            "client-extensions/custom-element-react",
             "client-extensions/theme-spritemap",
+            "client-extensions/custom-element-create-react-app",
             "generate-cli"
         ]
     }
