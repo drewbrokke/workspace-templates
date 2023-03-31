@@ -1,0 +1,17 @@
+assemble:
+    - from: build/css/styles.css
+      into: static
+    - from: build/index.js
+      into: static
+{{ nameKebabCase }}:
+    cssURLs:
+        - styles.css
+    friendlyURLMapping: {{ nameKebabCase }}
+    htmlElementName: {{ nameKebabCase }}
+    instanceable: false
+    name: {{ name }}
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - index.js
+    useESM: true
