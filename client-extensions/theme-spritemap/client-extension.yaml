@@ -1,8 +1,7 @@
 assemble:
-    - from: build
-      include: spritemap.svg
+    - from: build/spritemap.svg
       into: static
 theme-spritemap:
-    name: Theme Spritemap
+    name: theme-spritemap
     type: themeSpritemap
     url: spritemap.svg 

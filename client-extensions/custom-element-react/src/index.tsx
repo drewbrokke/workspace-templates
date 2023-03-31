@@ -37,7 +37,7 @@ class WebComponent extends HTMLElement {
 	}
 }
 
-const ELEMENT_ID = '';
+const ELEMENT_ID = 'custom-element-react';
 
 if (!customElements.get(ELEMENT_ID)) {
 	customElements.define(ELEMENT_ID, WebComponent);

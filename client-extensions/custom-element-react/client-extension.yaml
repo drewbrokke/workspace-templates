@@ -1,13 +1,13 @@
 assemble:
     - from: build/static
       into: static
-react-custom-element-typescript:
+custom-element-react:
     cssURLs:
         - css/main.*.css
-    friendlyURLMapping: react-custom-element-typescript
-    htmlElementName: react-custom-element-typescript
+    friendlyURLMapping: custom-element-react
+    htmlElementName: custom-element-react
     instanceable: false
-    name: React custom element typescript
+    name: custom-element-react
     portletCategoryName: category.client-extensions
     type: customElement
     urls:
