@@ -1,13 +1,13 @@
 assemble:
     - from: build/static
       into: static
-custom-element-react:
+custom-element-create-react-app:
     cssURLs:
         - css/main.*.css
-    friendlyURLMapping: custom-element-react
-    htmlElementName: custom-element-react
+    friendlyURLMapping: custom-element-create-react-app
+    htmlElementName: custom-element-create-react-app
     instanceable: false
-    name: custom-element-react
+    name: custom-element-create-react-app
     portletCategoryName: category.client-extensions
     type: customElement
     urls:
