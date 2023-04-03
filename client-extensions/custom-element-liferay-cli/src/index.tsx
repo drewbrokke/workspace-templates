@@ -14,7 +14,7 @@ class CustomElement extends HTMLElement {
 			root
 		);
 
-		this.appendChild(root
+		this.appendChild(root);
 	}
 }
 
