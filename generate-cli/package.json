@@ -10,5 +10,6 @@
 		"inquirer": "^8.2.5",
 		"js-yaml": "^4.1.0",
 		"mustache": "^4.2.0"
-	}
+	},
+	"scripts": {"build": true}
 }
