@@ -10,6 +10,10 @@ Setup:
 1. Clone this repo
 2. `./gradlew yarnInstall`
 
+Deploying Existing Extensions:
+1. Run `yarn workspaces build` (This is particularly helpful for the "shared" container)
+2. `cd ./client-extensions`
+3. `gw deploy`
 
 Creating a new Client Extension:
 1. `cd ./client-extensions`
