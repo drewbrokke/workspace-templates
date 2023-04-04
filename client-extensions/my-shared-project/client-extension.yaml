@@ -1,3 +1,11 @@
+prepare:
+  - command: [yarn]
+  - command: [yarn, build]
+    workingDir: theme-spritemap-2
+  - command: [yarn, build]
+    workingDir: custom-element-liferay-cli-2
+  - command: [yarn, build]
+    workingDir: custom-element-create-react-app-2
 assemble:
   - from: theme-spritemap-2/build/spritemap.svg
     into: static/theme-spritemap-2
