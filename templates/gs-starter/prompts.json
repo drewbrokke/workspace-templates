@@ -1,0 +1,8 @@
+[
+	{
+		"default": "default",
+		"message": "Please enter the web id for the virtual instance that you want to deploy to",
+		"name": "virtualInstanceId",
+		"type": "input"
+	}
+]
