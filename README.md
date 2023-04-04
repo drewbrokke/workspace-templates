@@ -20,6 +20,8 @@ Creating a new Client Extension:
 2. `yarn exec createClientExtension` (POC way to call our tool)
 3. Choose your project and follow the prompts
 
+> You may also need to run `gw setupYarn` to properly add the extension to your yarn workspace
+
 
 ## Template Directory Structure
 
