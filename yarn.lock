@@ -2215,6 +2215,11 @@
     uuid "9.0.0"
     xss-filters "1.2.7"
 
+"@liferay/js-api@0.2.0-pre.0":
+  version "0.2.0-pre.0"
+  resolved "https://registry.yarnpkg.com/@liferay/js-api/-/js-api-0.2.0-pre.0.tgz#3f41867a281ec5f38aaf263febaeca222ceca7fd"
+  integrity sha512-WhMR/eSB622wBdnu7t2zoL4SlPYcvMSd2hCq4ZyuSfN+ko1qAtAHfYy3GjGXea5Y4J0l/z/J6+15zhWZLsqZZQ==
+
 "@liferay/js-toolkit-core@^5.0.0":
   version "5.9.1"
   resolved "https://registry.yarnpkg.com/@liferay/js-toolkit-core/-/js-toolkit-core-5.9.1.tgz#01986eac071489492dbff4af89d439ddf8cde4ee"
