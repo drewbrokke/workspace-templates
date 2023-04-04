@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnusedLabels": false,
+    "sourceMap": false,
+    "allowUnreachableCode": false
+  },
+  "extends": "./tsconfig"
+}

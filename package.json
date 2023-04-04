@@ -3,6 +3,7 @@
     "workspaces": {
         "packages": [
             "client-extensions/liferay-sample-fds-cell-renderer",
+            "client-extensions/gs-starter",
             "client-extensions/custom-element-liferay-cli",
             "client-extensions/my-shared-project/theme-spritemap-2",
             "client-extensions/my-shared-project/custom-element-create-react-app-2",

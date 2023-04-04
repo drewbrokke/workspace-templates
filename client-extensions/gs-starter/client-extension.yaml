@@ -1,0 +1,23 @@
+assemble:
+  - from: dist
+    include: "*.css"
+    into: static/
+  - from: dist
+    include: "*.js"
+    into: static/
+gs-starter:
+  type: customElement
+  cssURLs:
+    - /my-app.css
+  friendlyURLMapping: gs-starter
+  htmlElementName: gs-starter
+  instanceable: false
+  name: my-app
+  portletCategoryName: category.client-extensions
+  properties: {}
+  description: ""
+  urls:
+    - /my-app.js
+  useESM: true
+  sourceCodeURL: ""
+  dxp.lxc.liferay.com.virtualInstanceId: default
