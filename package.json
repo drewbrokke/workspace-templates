@@ -2,12 +2,11 @@
     "private": true,
     "workspaces": {
         "packages": [
-            "client-extensions/fds-cell-renderer",
+            "client-extensions/liferay-sample-fds-cell-renderer",
             "client-extensions/custom-element-liferay-cli",
             "client-extensions/my-shared-project/theme-spritemap-2",
             "client-extensions/my-shared-project/custom-element-create-react-app-2",
             "client-extensions/my-shared-project/custom-element-liferay-cli-2",
-            "client-extensions/my-shared-project/fds-cell-renderer-2",
             "client-extensions/theme-spritemap",
             "client-extensions/custom-element-create-react-app",
             "generate-cli"

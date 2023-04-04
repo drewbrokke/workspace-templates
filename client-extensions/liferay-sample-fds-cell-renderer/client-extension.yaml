@@ -1,0 +1,7 @@
+assemble:
+    - from: build/index.js
+      into: static
+liferay-sample-fds-cell-renderer:
+    name: liferay-sample-fds-cell-renderer
+    type: fdsCellRenderer
+    url: index.js 

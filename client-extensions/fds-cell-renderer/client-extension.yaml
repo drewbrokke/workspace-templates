@@ -1,7 +1,0 @@
-assemble:
-    - from: build/index.js
-      into: static
-fds-cell-renderer:
-    name: fds-cell-renderer
-    type: fdsCellRenderer
-    url: index.js

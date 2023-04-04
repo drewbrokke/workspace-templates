@@ -1,15 +1,12 @@
 {
-  "name": "fds-cell-renderer",
+  "name": "liferay-sample-fds-cell-renderer",
   "version": "1.0.0",
   "dependencies": {
-    "@liferay/js-api": "0.2.0-pre.0",
     "@liferay/dxp-7.4": "*"
   },
   "main": "./src/index.tsx",
   "scripts": {
     "build": "liferay build",
-    "clean": "liferay clean",
-    "deploy": "liferay deploy",
     "start": "liferay start"
   }
 }
