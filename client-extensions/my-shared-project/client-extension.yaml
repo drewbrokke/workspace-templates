@@ -1,8 +1,6 @@
 assemble:
   - from: theme-spritemap-2/build/spritemap.svg
     into: static/theme-spritemap-2
-  - from: fds-cell-renderer-2/build/index.js
-    into: static/fds-cell-renderer-2
   - from: custom-element-liferay-cli-2/build/css/styles.css
     into: static/custom-element-liferay-cli-2
   - from: custom-element-liferay-cli-2/build/index.js
@@ -13,10 +11,6 @@ theme-spritemap-2:
   name: theme-spritemap-2
   type: themeSpritemap
   url: theme-spritemap-2/spritemap.svg
-fds-cell-renderer-2:
-  name: fds-cell-renderer-2
-  type: fdsCellRenderer
-  url: fds-cell-renderer-2/index.js
 custom-element-liferay-cli-2:
   cssURLs:
     - custom-element-liferay-cli-2/styles.css
