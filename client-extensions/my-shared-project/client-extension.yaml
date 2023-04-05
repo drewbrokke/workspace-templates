@@ -9,9 +9,7 @@ prepare:
 assemble:
   - from: theme-spritemap-2/build/spritemap.svg
     into: static/theme-spritemap-2
-  - from: custom-element-liferay-cli-2/build/css/styles.css
-    into: static/custom-element-liferay-cli-2
-  - from: custom-element-liferay-cli-2/build/index.js
+  - from: custom-element-liferay-cli-2/build
     into: static/custom-element-liferay-cli-2
   - from: custom-element-create-react-app-2/build/static
     into: static/custom-element-create-react-app-2
@@ -21,7 +19,7 @@ theme-spritemap-2:
   url: theme-spritemap-2/spritemap.svg
 custom-element-liferay-cli-2:
   cssURLs:
-    - custom-element-liferay-cli-2/styles.css
+    - custom-element-liferay-cli-2/**/*.css
   friendlyURLMapping: custom-element-liferay-cli-2
   htmlElementName: custom-element-liferay-cli-2
   instanceable: false
