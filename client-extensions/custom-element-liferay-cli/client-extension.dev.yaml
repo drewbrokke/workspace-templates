@@ -1,5 +1,0 @@
-custom-element-liferay-cli:
-    cssURLs:
-        - localhost:8081/o/custom-element-liferay-cli/styles.css
-    urls:
-        - localhost:8081/o/custom-element-liferay-cli/index.js
