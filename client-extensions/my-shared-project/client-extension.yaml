@@ -31,7 +31,7 @@ custom-element-liferay-cli-2:
   useESM: true
 custom-element-create-react-app-2:
   cssURLs:
-    - custom-element-create-react-app-2/css/main.*.css
+    - custom-element-create-react-app-2/**/*.css
   friendlyURLMapping: custom-element-create-react-app-2
   htmlElementName: custom-element-create-react-app-2
   instanceable: false
@@ -39,5 +39,5 @@ custom-element-create-react-app-2:
   portletCategoryName: category.client-extensions
   type: customElement
   urls:
-    - custom-element-create-react-app-2/js/main.*.js
+    - custom-element-create-react-app-2/**/*.js
   useESM: true
