@@ -1,0 +1,8 @@
+custom-element-liferay-cli-2:
+  cssURLs:
+      - http://localhost:5005/css/styles.css
+  urls:
+      - http://localhost:5005/index.js
+custom-element-create-react-app-2:
+  urls:
+    - http://localhost:6006/static/js/bundle.js
